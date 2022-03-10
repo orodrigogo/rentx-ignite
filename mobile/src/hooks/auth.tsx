@@ -131,7 +131,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         user: data,
         signIn,
         signOut,
-        updatedUser
+        updatedUser,
       }}
     >
       {children}

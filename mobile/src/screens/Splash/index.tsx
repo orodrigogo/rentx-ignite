@@ -54,19 +54,24 @@ export function Splash() {
   });
 
   function startApp() {
-    //navigation.navigate('SignIn');
     navigation.dispatch(StackActions.replace('SignIn'));
   }
 
   useEffect(() => {
-    splashAnimation.value = withTiming(
-      50,
-      { duration: 1000 },
-      () => {
-        'worklet'
-        runOnJS(startApp)();
-      }
-    );
+    let unmounted = false;
+
+    if (unmounted) {
+      splashAnimation.value = withTiming(
+        50,
+        { duration: 1000 },
+        () => {
+          'worklet'
+          runOnJS(startApp)();
+        }
+      );
+    }
+
+    return () => { unmounted = true };
   }, []);
 
   return (

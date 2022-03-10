@@ -27,15 +27,15 @@ export default function App() {
     Archivo_600SemiBold
   });
 
-  if(!fontsLoaded){
+  if (!fontsLoaded) {
     return <AppLoading />
   }
 
   return (
-    <ThemeProvider theme={theme}>    
+    <ThemeProvider theme={theme}>
       <AppProvider>
-        <Routes />      
-      </AppProvider>  
+        <Routes />
+      </AppProvider>
     </ThemeProvider>
   )
 }

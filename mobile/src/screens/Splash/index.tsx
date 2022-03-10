@@ -60,7 +60,7 @@ export function Splash() {
   useEffect(() => {
     let unmounted = false;
 
-    if (unmounted) {
+    if (!unmounted) {
       splashAnimation.value = withTiming(
         50,
         { duration: 1000 },

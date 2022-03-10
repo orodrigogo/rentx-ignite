@@ -44,6 +44,10 @@ class CarsRepository implements ICarsRepository {
     return cars;
   }
 
+  async update(car: Car): Promise<Car> {
+    await this.repository.save(car);
+    return car;
+  }
 
 }
 

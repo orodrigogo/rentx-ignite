@@ -5,6 +5,7 @@ interface ICarsRepository {
   listByCreated(date: number): Promise<Car[]>;
   findById(id: string): Promise<Car>;
   listAll(): Promise<Car[]>;
+  update(car: Car): Promise<Car>;
 }
 
 export { ICarsRepository };

@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, UpdateDateColumn, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 import { Accessory } from "./Accessory";
 
@@ -39,10 +39,10 @@ class Car {
   accessories: Accessory[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at: number;
 
-  @CreateDateColumn()
-  updated_at: Date;
+  @UpdateDateColumn()
+  updated_at: number;
 
   constructor() {
     if (!this.id) {

@@ -1,42 +1,28 @@
+import { Feather } from '@expo/vector-icons';
+import { useNetInfo } from '@react-native-community/netinfo';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/core';
+import * as ImagePicker from 'expo-image-picker';
 import React, { useEffect, useState } from 'react';
 import {
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Alert
+  Alert, Keyboard, KeyboardAvoidingView,
+  TouchableWithoutFeedback
 } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import { useNavigation } from '@react-navigation/core';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import * as Yup from 'yup';
-import { useNetInfo } from '@react-native-community/netinfo';
-import { api } from '../../services/api';
-
-import { useAuth } from '../../hooks/auth';
 import { useTheme } from 'styled-components';
-import { Feather } from '@expo/vector-icons';
-
+import * as Yup from 'yup';
 import { BackButton } from '../../components/BackButton';
-import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
-
+import { useAuth } from '../../hooks/auth';
+import { api } from '../../services/api';
 import {
-  Container,
-  Header,
-  HeaderTop,
-  HeaderTitle,
-  LogoutButton,
-  PhotoContainer,
-  Photo,
-  PhotoButton,
-  Content,
-  Options,
-  Option,
-  OptionTitle,
-  Section
+  Container, Content, Header, HeaderTitle, HeaderTop, LogoutButton, Option, Options, OptionTitle, Photo,
+  PhotoButton, PhotoContainer, Section
 } from './styles';
-import { Asset } from 'react-native-unimodules';
+
+
+
 
 export function Profile() {
   const { user, signOut, updatedUser } = useAuth();
@@ -80,7 +66,7 @@ export function Profile() {
     }
 
     if (result.uri) {
-      console.log(result.uri);
+      //console.log(result.uri);
       setAvatar(result.uri);
     }
   }
@@ -172,7 +158,7 @@ export function Profile() {
             </HeaderTop>
 
             <PhotoContainer>
-              <Photo source={{ uri: user.avatar }} />
+              <Photo source={{ uri: avatar }} />
 
               {/* !!avatar && <Photo source={{ uri: avatar }} /> */}
 

@@ -1,22 +1,17 @@
-import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/core';
-
+import { StackActions } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import Animated, {
+  Extrapolate, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming
+} from 'react-native-reanimated';
 import BrandSvg from '../../assets/brand.svg';
 import LogoSvg from '../../assets/logo.svg';
-
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  interpolate,
-  Extrapolate,
-  runOnJS
-} from 'react-native-reanimated';
-
 import {
   Container
 } from './styles';
-import { StackActions } from '@react-navigation/native';
+
+
+
 
 export function Splash() {
   const splashAnimation = useSharedValue(0);
@@ -58,20 +53,21 @@ export function Splash() {
   }
 
   useEffect(() => {
-    let unmounted = false;
+    let mounted = true;
 
-    if (!unmounted) {
-      splashAnimation.value = withTiming(
-        50,
-        { duration: 1000 },
-        () => {
+    splashAnimation.value = withTiming(
+      50,
+      { duration: 1000 },
+      () => {
+        if (mounted) {
           'worklet'
           runOnJS(startApp)();
         }
-      );
-    }
+      }
+    );
 
-    return () => { unmounted = true };
+
+    return () => { mounted = false };
   }, []);
 
   return (

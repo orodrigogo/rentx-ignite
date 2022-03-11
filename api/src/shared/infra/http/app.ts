@@ -1,20 +1,20 @@
-import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
-import { router } from "./routes";
 import { resolve } from "path";
-
-import '../database';
+import "reflect-metadata";
 import "../../container";
-
 import { AppError } from "../../errors/AppError";
+import '../database';
+import { router } from "./routes";
+
+
 
 const app = express();
 
 app.use(express.json());
 app.use(router);
-import { } from '../../../../tmp/avatar'
-app.use('/files', express.static(resolve(__dirname, "..", "..", "..", "..", 'tmp', 'avatar')));
+
+app.use('/files', express.static(resolve(__dirname, "..", "..", "..", "tmp")));
 
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
@@ -32,3 +32,4 @@ app.use(
 );
 
 export { app };
+

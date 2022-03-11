@@ -1,45 +1,30 @@
+import { useNetInfo } from '@react-native-community/netinfo';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
-import { useTheme } from 'styled-components';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { useNetInfo } from '@react-native-community/netinfo';
-
-import { api } from '../../services/api';
-
 import Animated, {
-  useSharedValue,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-  interpolate,
-  Extrapolate
+  Extrapolate, interpolate, useAnimatedScrollHandler,
+  useAnimatedStyle, useSharedValue
 } from 'react-native-reanimated';
-
-import { BackButton } from '../../components/BackButton';
-import { ImageSlider } from '../../components/ImageSlider';
+import { useTheme } from 'styled-components';
 import { Accessory } from '../../components/Accessory';
+import { BackButton } from '../../components/BackButton';
 import { Button } from '../../components/Button';
-
-import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
+import { ImageSlider } from '../../components/ImageSlider';
 import { CarDTO } from '../../dtos/CarDTO';
-import { Car as CarModel } from '../../database/model/Car';
-
+import { api } from '../../services/api';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 import {
-  Container,
-  Header,
-  CarImages,
-  Details,
-  Description,
-  Brand,
-  Name,
-  Rent,
-  Period,
-  Price,
   About,
-  Accessories,
-  Footer,
-  OfflineInfo
+  Accessories, Brand, CarImages, Container, Description, Details, Footer, Header, Name, OfflineInfo, Period,
+  Price, Rent
 } from './styles';
+
+
+
+
+
 
 interface Params {
   carId: string;
@@ -159,7 +144,7 @@ export function CarDetails() {
             {
               car.accessories.map(accessory => (
                 <Accessory
-                  key={accessory.type}
+                  key={accessory.id}
                   name={accessory.name}
                   icon={getAccessoryIcon(accessory.type)}
                 />

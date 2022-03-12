@@ -49,7 +49,7 @@ export function Splash() {
   });
 
   function startApp() {
-    navigation.dispatch(StackActions.replace('SignIn'));
+    navigation.dispatch(StackActions.replace('Home'));
   }
 
   useEffect(() => {

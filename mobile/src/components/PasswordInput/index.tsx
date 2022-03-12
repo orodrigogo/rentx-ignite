@@ -1,14 +1,14 @@
+import { Feather } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { TextInputProps } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { useTheme } from 'styled-components';
 import { BorderlessButton } from 'react-native-gesture-handler';
-
+import { useTheme } from 'styled-components';
 import {
   Container,
   IconContainer,
-  InputText,
+  InputText
 } from './styles';
+
 
 interface Props extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>['name'];
@@ -19,7 +19,7 @@ export function PasswordInput({
   iconName,
   value,
   ...rest
-} : Props ){
+}: Props) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -32,7 +32,7 @@ export function PasswordInput({
 
   function handleInputBlur() {
     setIsFocused(false);
-    setIsFilled(!!value)     
+    setIsFilled(!!value)
   }
 
   function handlePasswordVisibilityChange() {
@@ -41,26 +41,27 @@ export function PasswordInput({
 
 
   return (
-    <Container isFocused={isFocused}>
-      <IconContainer>
-        <Feather 
+    <Container>
+      <IconContainer isFocused={isFocused}>
+        <Feather
           name={iconName}
           size={24}
           color={(isFocused || isFilled) ? theme.colors.main : theme.colors.text_detail}
         />
       </IconContainer>
 
-      <InputText 
+      <InputText
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         secureTextEntry={isPasswordVisible}
-        autoCorrect={false}            
+        autoCorrect={false}
+        isFocused={isFocused}
         {...rest}
       />
 
       <BorderlessButton onPress={handlePasswordVisibilityChange}>
-        <IconContainer>
-          <Feather 
+        <IconContainer isFocused={isFocused}>
+          <Feather
             name={isPasswordVisible ? 'eye' : 'eye-off'}
             size={24}
             color={theme.colors.text_detail}

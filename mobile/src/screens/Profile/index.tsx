@@ -66,7 +66,6 @@ export function Profile() {
     }
 
     if (result.uri) {
-      //console.log(result.uri);
       setAvatar(result.uri);
     }
   }
@@ -158,9 +157,7 @@ export function Profile() {
             </HeaderTop>
 
             <PhotoContainer>
-              <Photo source={{ uri: avatar }} />
-
-              {/* !!avatar && <Photo source={{ uri: avatar }} /> */}
+              {!!avatar && <Photo source={{ uri: avatar }} />}
 
               <PhotoButton onPress={handleAvatarSelect}>
                 <Feather

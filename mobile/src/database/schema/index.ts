@@ -1,14 +1,14 @@
 import { appSchema } from '@nozbe/watermelondb';
-
-import { userSchema } from './userSchema';
 import { carSchema } from './carSchema';
+import { userSchema } from './userSchema';
+
 
 const schemas = appSchema({
-  version: 12,
+  version: 13,
   tables: [
     userSchema,
     carSchema
   ]
 });
 
-export { schemas }
+export { schemas };

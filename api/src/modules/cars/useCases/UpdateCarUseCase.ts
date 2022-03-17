@@ -36,6 +36,7 @@ class UpdateCarUseCase {
     car.price = data.price;
     car.fuel_type = data.fuel_type;
     car.thumbnail = data.thumbnail;
+    car.updated_at = new Date().getTime();
 
     return this.carsRepository.update(car);
   }

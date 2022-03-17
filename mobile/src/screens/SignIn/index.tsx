@@ -30,7 +30,7 @@ export function SignIn() {
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
-  const { signIn } = useAuth();
+  const { signIn, isLogging } = useAuth();
 
   async function handleSignIn() {
     try {
@@ -103,8 +103,8 @@ export function SignIn() {
             <Button
               title="Login"
               onPress={handleSignIn}
-              enabled={true}
-              loading={false}
+              enabled={!isLogging}
+              loading={isLogging}
             />
 
             <Button
@@ -112,8 +112,6 @@ export function SignIn() {
               color={theme.colors.background_secondary}
               light
               onPress={handleNewAccount}
-              enabled={true}
-              loading={false}
             />
           </Footer>
 

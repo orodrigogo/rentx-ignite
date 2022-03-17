@@ -28,6 +28,7 @@ interface SignInCredentials {
 
 interface AuthContextData {
   user: User;
+  isLogging: boolean;
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => Promise<void>;
   updatedUser: (user: User) => Promise<void>;
@@ -41,14 +42,19 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
   const [data, setData] = useState<User>({} as User);
+  const [isLogging, setIsLogging] = useState(false);
 
   async function signIn({ email, password }: SignInCredentials) {
+    setIsLogging(true);
+
     const response = await api.post('/sessions', {
       email,
       password
     });
 
     if (response.data.message === "Email or password incorret!") {
+      setIsLogging(false);
+
       return Alert.alert(
         'Erro na autenticação',
         'E-mail ou usuário inválido!'
@@ -71,6 +77,12 @@ function AuthProvider({ children }: AuthProviderProps) {
           newUser.token = token
       }).then((userData) => {
         setData(userData._raw as unknown as User);
+      }).catch(() => {
+        setIsLogging(false);
+        return Alert.alert(
+          'Erro na autenticação',
+          'Não foi possível realizar o login!'
+        )
       })
     });
   }
@@ -85,7 +97,12 @@ function AuthProvider({ children }: AuthProviderProps) {
 
       setData({} as User);
     } catch (error) {
-      throw new Error(error);
+      return Alert.alert(
+        'Erro na atualização',
+        'Não foi possível atualizar os dados do usuário!'
+      )
+
+      console.log(error);
     }
   }
 
@@ -129,6 +146,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider
       value={{
         user: data,
+        isLogging,
         signIn,
         signOut,
         updatedUser,

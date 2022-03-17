@@ -4,7 +4,7 @@ import { userSchema } from './userSchema';
 
 
 const schemas = appSchema({
-  version: 13,
+  version: 15,
   tables: [
     userSchema,
     carSchema
